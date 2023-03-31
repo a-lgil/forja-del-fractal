@@ -5,7 +5,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from matplotlib.colors import rgb2hex
 
-if st.session_state.get('pasos') is None:
+if 'pasos' not in st.session_state:
     st.session_state.pasos = 3
 
 def sistema_funciones_iteradas(sfi, pasos, semilla):
@@ -217,11 +217,6 @@ with settings_col:
     # Use pre-defined IFS
     use_ifs = st.checkbox('Usar IFS predefinido', value=True)
 
-    if use_ifs != st.session_state.use_ifs:
-        st.session_state.use_ifs = use_ifs
-        st.experimental_rerun()
-
-
     if use_ifs:
 
         # selectbox to choose the IFS
@@ -260,10 +255,7 @@ with settings_col:
 
         max_pasos = int(math.log(3000000, num_rows))
 
-        if st.session_state.pasos > max_pasos:
-            st.session_state.pasos = max_pasos
-
-        pasos = st.number_input('Pasos', min_value=1, max_value=max_pasos, value=st.session_state.pasos, step=1)
+        pasos = st.number_input('Pasos', min_value=1, max_value=max_pasos, value=min(st.session_state.pasos, max_pasos), step=1)
 
         st.session_state.pasos = pasos
 
