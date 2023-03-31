@@ -236,7 +236,7 @@ with settings_col:
 
         max_pasos = int(math.log(3000000, num_rows))
 
-        pasos = st.number_input('Pasos', min_value=1, max_value=max_pasos, value=min(max_pasos-1, 7), step=1)
+        pasos = st.number_input('Pasos', min_value=1, max_value=max_pasos, value=min(max_pasos-1, 8), step=1)
 
     with settings_col_3:
         semilla_x = st.number_input('Semilla x', min_value=-10.0, max_value=10.0, value=0.0, step=0.01)
