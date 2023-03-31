@@ -1,3 +1,4 @@
+import math
 import time
 import streamlit as st
 
@@ -253,7 +254,7 @@ with settings_col:
     # pasos = 50000
     # semilla = (0, 0)
     with settings_col_2:
-        pasos = st.number_input('Pasos', min_value=1, max_value=17 if num_rows != 1 else 25, value=10 if not use_ifs else 13-len(ifs), step=1)
+        pasos = st.number_input('Pasos', min_value=1, max_value=int(math.log(3000000, num_rows)), value=10 if not use_ifs else 13-len(ifs), step=1)
 
     with settings_col_3:
         semilla_x = st.number_input('Semilla x', min_value=-10.0, max_value=10.0, value=0.0, step=0.01)
