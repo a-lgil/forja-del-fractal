@@ -351,7 +351,7 @@ with viewer_col:
         start_time = time.time()
 
         fractal = dibujar_fractal(sistema_funciones_iteradas(ifs, pasos, semilla), color, show_points, show_lines,
-                                    point_size if show_points else None, line_width if show_lines else None, interpolate)
+                                    point_size if show_points else None, line_width if show_lines else None, interpolate if show_lines else None)
 
         end_time = time.time()
 
