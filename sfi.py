@@ -328,7 +328,13 @@ with viewer_col:
     ifs = []
 
     for i in range(num_rows): # type: ignore
-        ifs.append([float(a[i]), float(b[i]), float(c[i]), float(d[i]), float(e[i]), float(f[i])])
+        ifs.append([float(a[i]) if a[i] != '' else 0,
+                    float(b[i]) if b[i] != '' else 0,
+                    float(c[i]) if c[i] != '' else 0,
+                    float(d[i]) if d[i] != '' else 0,
+                    float(e[i]) if e[i] != '' else 0,
+                    float(f[i]) if f[i] != '' else 0,
+                ])
 
     # Plot settings, points and lines on and off and sizes
     col1, col2, col3 = st.columns(3)
