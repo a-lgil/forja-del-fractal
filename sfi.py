@@ -316,7 +316,13 @@ with settings_col:
             hex_color = rgb2hex(rgba[:3])
             color.append(col7.color_picker(f'color{i}', value=hex_color, label_visibility='collapsed'))
 
-    generate_fractal = st.button('Generar fractal')
+    col1, col2 = st.columns([1, 3])
+
+    with col2:
+        update = st.checkbox('Actualizar automáticamente', value=True)
+
+    with col1:
+        generate_fractal = st.button('Generar fractal', disabled=update, use_container_width=True)
 
 with viewer_col:
 
@@ -346,11 +352,14 @@ with viewer_col:
             interpolate = st.checkbox('Interpolar', value=False)
 
     # Now we have to plot the IFS
-    if generate_fractal:
+    if generate_fractal or update:
 
         start_time = time.time()
 
         puntos_fractal = sistema_funciones_iteradas(ifs, pasos, semilla)
+
+        # Generando fractal...
+        st.spinner('Generando fractal...')
 
         fractal = dibujar_fractal(puntos_fractal, color, show_points, show_lines, point_size if show_points else None,
                                   line_width if show_lines else None, interpolate if show_lines else None)
