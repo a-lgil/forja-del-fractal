@@ -247,7 +247,7 @@ with settings_col:
     semilla = (semilla_x, semilla_y)
 
     with settings_col_5:
-        point_size = st.number_input('Tamaño puntos', min_value=0.001, max_value=100.0, value=0.05, step=1.0)
+        point_size = st.number_input('Tamaño puntos', min_value=0.001, max_value=100.0, value=0.05, step=0.05)
 
     # divider
     st.subheader('IFS')
