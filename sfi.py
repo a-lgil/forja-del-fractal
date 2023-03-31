@@ -215,7 +215,7 @@ with settings_col:
     st.subheader('Parámetros')
 
     # Use pre-defined IFS
-    use_ifs = st.checkbox('Usar IFS predefinido')
+    use_ifs = st.checkbox('Usar IFS predefinido', value=True)
 
     if use_ifs != st.session_state.use_ifs:
         st.session_state.use_ifs = use_ifs
@@ -228,7 +228,7 @@ with settings_col:
         ifs = st.selectbox('IFS', ('Triángulo de Sierpinski', 'Alfombra de Sierpinski', 'Curva de Koch', 'Copo de Koch', 
                                    'Helecho de Barnsley', 'Cuadradetes', 'Cantor', 'Cantor Final 2020 Ej 2', 'Copo de nieve raruno',
                                 'Problema aleatorio 1', 'Problema aleatorio 2', 'Problema aleatorio 3', 'Problema aleatorio 4',
-                                'Problema aleatorio 5', 'Problema aleatorio 6', 'Problema aleatorio 7', 'Atractor 6'), label_visibility='collapsed')
+                                'Problema aleatorio 5', 'Problema aleatorio 6', 'Problema aleatorio 7', 'Atractor 6'), label_visibility='collapsed', index=0)
 
         ifs_dict = {'Triángulo de Sierpinski': sierpinski_triangulo, 'Alfombra de Sierpinski': sierpinski_alfombra,
                     'Curva de Koch': koch, 'Copo de Koch': koch_copo, 'Helecho de Barnsley': barnsley,
