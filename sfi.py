@@ -5,8 +5,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from matplotlib.colors import rgb2hex
 
-if 'pasos' not in st.session_state:
-    st.session_state.pasos = 3
+st.set_page_config(page_title='SFI Fractal', layout='wide')
 
 def sistema_funciones_iteradas(sfi, pasos, semilla):
     '''
@@ -198,9 +197,6 @@ ifs_vacio = [[0 for i in range(6)] for j in range(15)]
 
 # STREAMLIT APP ---------------------------------------------------------------
 
-# force wide mode
-st.set_page_config(layout='wide')
-
 # save use_ifs in session state
 if 'use_ifs' not in st.session_state:
     st.session_state.use_ifs = False
@@ -210,7 +206,7 @@ settings_col, viewer_col = st.columns(2)
 # Settings
 with settings_col:
 
-    st.title('Generador de fractales')
+    st.title('Generador de fractales con SFI')
 
     st.subheader('Parámetros')
 
@@ -255,9 +251,7 @@ with settings_col:
 
         max_pasos = int(math.log(3000000, num_rows))
 
-        pasos = st.number_input('Pasos', min_value=1, max_value=max_pasos, value=min(st.session_state.pasos, max_pasos), step=1)
-
-        st.session_state.pasos = pasos
+        pasos = st.number_input('Pasos', min_value=1, max_value=max_pasos, value=max_pasos-1, step=1)
 
     with settings_col_3:
         semilla_x = st.number_input('Semilla x', min_value=-10.0, max_value=10.0, value=0.0, step=0.01)
