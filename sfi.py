@@ -5,6 +5,9 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from matplotlib.colors import rgb2hex
 
+if st.session_state.get('pasos') is None:
+    st.session_state.pasos = 3
+
 def sistema_funciones_iteradas(sfi, pasos, semilla):
     '''
     Función que implementa el algoritmo determinista para la obtención del fractal asociado a un sistema
@@ -254,7 +257,15 @@ with settings_col:
     # pasos = 50000
     # semilla = (0, 0)
     with settings_col_2:
-        pasos = st.number_input('Pasos', min_value=1, max_value=int(math.log(3000000, num_rows)), value=10 if not use_ifs else 13-len(ifs), step=1)
+
+        max_pasos = int(math.log(3000000, num_rows))
+
+        if st.session_state.pasos > max_pasos:
+            st.session_state.pasos = max_pasos
+
+        pasos = st.number_input('Pasos', min_value=1, max_value=max_pasos, value=st.session_state.pasos, step=1)
+
+        st.session_state.pasos = pasos
 
     with settings_col_3:
         semilla_x = st.number_input('Semilla x', min_value=-10.0, max_value=10.0, value=0.0, step=0.01)
