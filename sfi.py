@@ -327,20 +327,23 @@ with viewer_col:
         ifs.append([float(a[i]), float(b[i]), float(c[i]), float(d[i]), float(e[i]), float(f[i])])
 
     # Plot settings, points and lines on and off and sizes
-    col1, col2 = st.columns([1, 2])
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         show_points = st.checkbox('Puntos', value=True)
+        
+    with col2:
+        show_lines = st.checkbox('Líneas', value=False)
+
+    with col1:
         if show_points:
             point_size = st.number_input('Tamaño puntos', min_value=0.001, max_value=100.0, value=0.05, step=1.0)
-    with col2:
-        col1, col2 = st.columns(2)
-        show_lines = st.checkbox('Líneas', value=False)
-        if show_lines:
-            with col1:
-                line_width = st.number_input('Ancho líneas', min_value=0.001, max_value=100.0, value=0.5, step=1.0)
-            with col2:
-                interpolate = st.checkbox('Interpolar', value=False)
+    
+    if show_lines:
+        with col2:
+            line_width = st.number_input('Ancho líneas', min_value=0.001, max_value=100.0, value=0.5, step=1.0)
+        with col3:
+            interpolate = st.checkbox('Interpolar', value=False)
 
     # Now we have to plot the IFS
     if generate_fractal:
