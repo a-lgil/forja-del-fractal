@@ -62,7 +62,7 @@ def sistema_funciones_iteradas(sfi, pasos, semilla):
     return puntos_por_funcion
 
 # Dibujamos los puntos
-def dibujar_fractal(puntos_por_funcion, colormap, show_points, show_lines, point_size, line_width, interpolate):
+def dibujar_fractal(puntos_por_funcion, colormap, point_size):
 
     fig, ax = plt.subplots()
     fig.set_size_inches(15, 15)
@@ -79,23 +79,7 @@ def dibujar_fractal(puntos_por_funcion, colormap, show_points, show_lines, point
         y = [p[1] for p in puntos]
         color = colormap[i % len(colormap)]
 
-        if show_points:
-            ax.scatter(x, y, s=point_size, c=color)
-        
-        if show_lines:
-            if interpolate:
-                # use spline interpolation to smooth the line
-                from scipy.interpolate import splprep, splev
-                import numpy as np
-                        # Fit a spline curve
-                points = np.vstack((x, y))
-                tck, u = splprep(points, s=0)
-                unew = np.linspace(0, 1, 100000)
-                xnew, ynew = splev(unew, tck)
-
-                ax.plot(xnew, ynew, c=color, linewidth=line_width)
-            else:
-                ax.plot(x, y, c=color, linewidth=line_width)
+        ax.scatter(x, y, s=point_size, c=color)
 
     return fig
 
@@ -240,7 +224,7 @@ with settings_col:
         ifs = ifs_vacio
 
     # Setttings columns
-    settings_col_1, settings_col_2, settings_col_3, settings_col_4 = st.columns(4)
+    settings_col_1, settings_col_2, settings_col_3, settings_col_4, settings_col_5 = st.columns(5)
 
     # Number of rows in the IFS
     with settings_col_1:
@@ -261,6 +245,9 @@ with settings_col:
         semilla_y = st.number_input('Semilla y', min_value=-10.0, max_value=10.0, value=0.0, step=0.01)
 
     semilla = (semilla_x, semilla_y)
+
+    with settings_col_5:
+        point_size = st.number_input('Tamaño puntos', min_value=0.001, max_value=100.0, value=0.05, step=1.0)
 
     # divider
     st.subheader('IFS')
@@ -337,24 +324,24 @@ with viewer_col:
                     float(f[i]) if f[i] != '' else 0,
                 ])
 
-    # Plot settings, points and lines on and off and sizes
-    col1, col2, col3 = st.columns(3)
+    # # Plot settings, points and lines on and off and sizes
+    # col1, col2, col3 = st.columns(3)
 
-    with col1:
-        show_points = st.checkbox('Puntos', value=True)
+    # with col1:
+    #     show_points = st.checkbox('Puntos', value=True)
         
-    with col2:
-        show_lines = st.checkbox('Líneas', value=False)
+    # with col2:
+    #     show_lines = st.checkbox('Líneas', value=False)
 
-    with col1:
-        if show_points:
-            point_size = st.number_input('Tamaño puntos', min_value=0.001, max_value=100.0, value=0.05, step=1.0)
+    # with col1:
+    #     if show_points:
+    #         
     
-    if show_lines:
-        with col2:
-            line_width = st.number_input('Ancho líneas', min_value=0.001, max_value=100.0, value=0.5, step=1.0)
-        with col3:
-            interpolate = st.checkbox('Interpolar', value=False)
+    # if show_lines:
+    #     with col2:
+    #         line_width = st.number_input('Ancho líneas', min_value=0.001, max_value=100.0, value=0.5, step=1.0)
+    #         with col3:
+    #             interpolate = st.checkbox('Interpolar', value=False)
 
     # Now we have to plot the IFS
     if generate_fractal or update:
@@ -366,8 +353,7 @@ with viewer_col:
         # Generando fractal...
         st.spinner('Generando fractal...')
 
-        fractal = dibujar_fractal(puntos_fractal, color, show_points, show_lines, point_size if show_points else None,
-                                  line_width if show_lines else None, interpolate if show_lines else None)
+        fractal = dibujar_fractal(puntos_fractal, color, point_size)
 
         end_time = time.time()
 
