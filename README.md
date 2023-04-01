@@ -19,5 +19,5 @@ Estas transformaciones son aplicadas sucesivamente a cada punto, creando así pa
 
 - Genera fractales a partir de transformaciones afines personalizadas
 - Contiene ejemplos de fractales vistos durante la asignatura
-- Soporta varios colores para cada una de las funciones del SFI
+- Soporta personalización del color de cada una de las funciones del SFI
 - Posibilidad de exportar las imágenes de los fractales
