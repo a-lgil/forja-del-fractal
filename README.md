@@ -1,6 +1,6 @@
 <div align="center">
   <p>
-    <img height="110" src="assets/fractal2.svg">
+    <img height="110" src="assets/logo_fractal_2.svg">
     <h1>La Forja del Fractal</h1>
   </p>
 
