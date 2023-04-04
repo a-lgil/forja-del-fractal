@@ -1,12 +1,13 @@
+import base64
 import math
 import time
-import streamlit as st
 
 import matplotlib.pyplot as plt
+import streamlit as st
 from matplotlib.colors import rgb2hex
 
-# icon snowflake
-st.set_page_config(page_title='SFI Fractal', layout='wide', page_icon='❄')
+st.set_page_config(page_title='La forja del fractal', layout='wide', page_icon='assets/logo_fractal_2.ico')
+
 
 def sistema_funciones_iteradas(sfi, pasos, semilla):
     '''
@@ -186,22 +187,63 @@ ifs_vacio = [[0 for i in range(6)] for j in range(15)]
 if 'use_ifs' not in st.session_state:
     st.session_state.use_ifs = False
 
-settings_col, viewer_col = st.columns(2)
+settings_col, viewer_col = st.columns([6, 5])
 
 # Settings
 with settings_col:
 
-    st.title('Generador de fractales con SFI')
+    # Logo and title (with Markdown for more control than the provided with the Streamlit framework)
+    st.markdown(
+        """
+        <style>
+        .container {
+            display: flex;
+        }
+        .logo-text {
+            font-weight:700 !important;
+            font-size:50px !important;
+            color: #31333F !important;
+            padding-top: 10px !important;
+            padding-left: 20px !important;
+        }
+        .logo-img {
+            float:right;
+            width: 110px !important;
+            height: 110px !important;
+        }
+        .small-text {
+            font-size: 15px !important;
+            color: rgba(49, 51, 63, 0.6) !important;
+            margin-top: -52px !important;
+            padding-left: 23px !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        f"""
+        <div class="container">
+            <img class="logo-img" src="data:image/png;base64,{base64.b64encode(open('assets/logo_fractal_2_512.png', "rb").read()).decode()}">
+            <div>
+                <p class="logo-text">La forja del fractal</p>
+                <br>
+                <p class="small-text">Un generador de fractales mediante sistemas de funciones iteradas</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.subheader('Parámetros')
 
     # Use pre-defined IFS
-    use_ifs = st.checkbox('Usar IFS predefinido', value=True)
+    use_ifs = st.checkbox('Usar SFI predefinido', value=True)
 
     if use_ifs:
 
         # selectbox to choose the IFS
-        ifs = st.selectbox('IFS', ('Triángulo de Sierpinski', 'Alfombra de Sierpinski', 'Curva de Koch', 'Copo de Koch', 
+        ifs = st.selectbox('SFI', ('Triángulo de Sierpinski', 'Alfombra de Sierpinski', 'Curva de Koch', 'Copo de Koch', 
                                    'Helecho de Barnsley', 'Cuadradetes', 'Cantor', 'Cantor Final 2020 Ej 2', 'Copo de nieve raruno',
                                 'Problema aleatorio 1', 'Problema aleatorio 2', 'Problema aleatorio 3', 'Problema aleatorio 4',
                                 'Problema aleatorio 5', 'Problema aleatorio 6', 'Problema aleatorio 7', 'Atractor 6'), label_visibility='collapsed', index=0)
@@ -254,7 +296,7 @@ with settings_col:
 
     # Create 6 columns in the streamlit app (a, b, c, d, e, f)
     def create_columns(i):
-        col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+        col1, col2, col3, col4, col5, col6, col7 = st.columns([2, 2, 2, 2, 2, 2, 1])
 
         if i == 0:
             col1.write('a')
@@ -263,7 +305,7 @@ with settings_col:
             col4.write('d')
             col5.write('e')
             col6.write('f')
-            col7.write('color')
+            col7.write('Color')
 
         return col1, col2, col3, col4, col5, col6, col7
 
@@ -312,7 +354,7 @@ with settings_col:
 
 with viewer_col:
 
-    # Now we have to save this a, b, c, d, e, f in a list of lists to generate the IFS
+    # Now we have to save this a, b, c, d, e, f in a list of lists to generate the SFI
     ifs = []
 
     for i in range(num_rows): # type: ignore
@@ -346,20 +388,18 @@ with viewer_col:
     # Now we have to plot the IFS
     if generate_fractal or update:
 
-        start_time = time.time()
+        with st.spinner('Generando fractal...'):
+            start_time = time.time()
 
-        puntos_fractal = sistema_funciones_iteradas(ifs, pasos, semilla)
+            puntos_fractal = sistema_funciones_iteradas(ifs, pasos, semilla)
 
-        # Generando fractal...
-        st.spinner('Generando fractal...')
+            fractal = dibujar_fractal(puntos_fractal, color, point_size)
 
-        fractal = dibujar_fractal(puntos_fractal, color, point_size)
+            end_time = time.time()
 
-        end_time = time.time()
+            st.pyplot(fractal)
 
-        st.pyplot(fractal)
+            st.caption(f'Fractal con {sum([len(p) for p in puntos_fractal])} puntos generado en {round(end_time-start_time, 3)} segundos')
 
-        st.caption(f'Fractal con {sum([len(p) for p in puntos_fractal])} puntos generado en {round(end_time-start_time, 3)} segundos')
-
-        st.write('Código IFS:')
-        st.text(ifs)
+            st.write('Código IFS:')
+            st.text(ifs)
