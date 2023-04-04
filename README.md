@@ -1,9 +1,8 @@
 <div align="center">
 <img height="100" src="assets/fractal2.svg">
-<h1>CapturePRO Jidōka</h1>
+<h1>Generador de Fractales con Sistemas de Funciones Iteradas</h1>
 </div>
 
-# Generador de Fractales con Sistemas de Funciones Iteradas
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ifs-fractal-generator-upm.streamlit.app/)
 
