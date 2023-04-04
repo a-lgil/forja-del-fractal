@@ -228,7 +228,7 @@ with settings_col:
 
     # Number of rows in the IFS
     with settings_col_1:
-        num_rows = st.number_input('Columnas', min_value=1, max_value=15, value=3 if not use_ifs else len(ifs), step=1)
+        num_rows = st.number_input('Funciones', min_value=1, max_value=15, value=3 if not use_ifs else len(ifs), step=1)
 
     # pasos = 50000
     # semilla = (0, 0)
