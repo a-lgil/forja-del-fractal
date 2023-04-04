@@ -1,7 +1,7 @@
 <div align="center">
   <p>
     <img height="110" src="assets/fractal2.svg">
-    <h1>Generador de Fractales con Sistemas de Funciones Iteradas</h1>
+    <h1>La Forja del Fractal</h1>
   </p>
 
 [comment]: <[Español](README.md) | [English](README.en.md)>
