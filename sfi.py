@@ -187,7 +187,7 @@ ifs_vacio = [[0 for i in range(6)] for j in range(15)]
 if 'use_ifs' not in st.session_state:
     st.session_state.use_ifs = False
 
-settings_col, viewer_col = st.columns([6, 5])
+settings_col, viewer_col = st.columns(2)
 
 # Settings
 with settings_col:
@@ -296,7 +296,7 @@ with settings_col:
 
     # Create 6 columns in the streamlit app (a, b, c, d, e, f)
     def create_columns(i):
-        col1, col2, col3, col4, col5, col6, col7 = st.columns([2, 2, 2, 2, 2, 2, 1])
+        col1, col2, col3, col4, col5, col6, col7 = st.columns([3, 3, 3, 3, 3, 3, 2])
 
         if i == 0:
             col1.write('a')
