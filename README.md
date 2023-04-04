@@ -17,7 +17,7 @@ Aplicación desarrollada para la asignatura de sistemas dinámicos, caos y fract
 
 Para ejecutar el programa, hacer click en la imagen (y rezar para que la aplicación no esté caída)
 
-[![imagen](https://user-images.githubusercontent.com/53956353/229168705-c6ac71ce-65cc-4e2e-af96-d3c016df016a.png)](https://ifs-fractal-generator-upm.streamlit.app/)
+[![imagen](https://user-images.githubusercontent.com/53956353/229944909-865e39c2-a71e-4de1-8461-556cf0366d92.png)](https://ifs-fractal-generator-upm.streamlit.app/)
 
 ## Funcionamiento
 
