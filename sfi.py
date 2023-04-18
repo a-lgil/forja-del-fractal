@@ -244,7 +244,7 @@ with settings_col:
 
         # selectbox to choose the IFS
         ifs = st.selectbox('SFI', ('Triángulo de Sierpinski', 'Alfombra de Sierpinski', 'Curva de Koch', 'Copo de Koch', 
-                                   'Helecho de Barnsley', 'Cuadradetes', 'Cantor', 'Cantor Final 2020 Ej 2', 'Copo de nieve raruno',
+                                   'Helecho de Barnsley', 'Cuadradetes', 'Cantor', 'Copo de nieve raruno',
                                 'Problema aleatorio 1', 'Problema aleatorio 2', 'Problema aleatorio 3', 'Problema aleatorio 4',
                                 'Problema aleatorio 5', 'Problema aleatorio 6', 'Problema aleatorio 7', 'Atractor 6'), label_visibility='collapsed', index=0)
 
